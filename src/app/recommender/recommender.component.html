@@ -1,0 +1,12 @@
+<div *ngFor="let session of sessionList">
+
+    <div>
+        <img [src]="session.item.imageUrl">
+        <p>Moderator: {{session.item.moderator}}</p>
+    </div>
+
+    <button (click)="changeImage()">Interested</button>
+    <button (click)="changeImage()">Not Interested</button>
+
+
+</div>
