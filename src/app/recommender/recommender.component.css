@@ -1,0 +1,28 @@
+.join {
+  background: gold;
+  border-radius: 100%;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  border-color: gold;
+  font-size: 30px;
+}
+.image {
+  margin-right: auto;
+  margin-left: auto;
+  margin: 100px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+img {
+  width: 30%;
+}
+.left {
+  width: 45%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: auto;
+  padding-left: auto;
+  float: left;
+}

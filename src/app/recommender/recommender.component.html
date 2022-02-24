@@ -1,4 +1,40 @@
-<div *ngFor="let session of sessionList">
+<div *ngIf="images.length != 0">
+  <br />
+  <p style="text-align: center; font-size: 20px">
+    Are you interested / planning to join this event?
+  </p>
+  <div class="image">
+    <img [src]="images[i]" alt="session recommendation" id="sessionimage" />
+  </div>
+  <div style="margin-left: 30%">
+    <div class="left">
+      <button class="join" id="btnj" (click)="like()">✓</button>
+    </div>
+    <div class="left">
+      <button class="join" id="btnj" (click)="dislike()">×</button>
+    </div>
+  </div>
+  <script
+    type="text/javascript"
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+  ></script>
+  <script type="text/javascript" src="recommend.js"></script>
+</div>
+
+<div *ngIf="images.length == 0">
+  <br />
+  <p *ngIf="likes.length == 0" style="text-align: center; font-size: 20px">
+    You didn't like any of the events yet.
+  </p>
+  <p *ngIf="likes.length > 0" style="text-align: center; font-size: 20px">
+    Here are the events that you liked:
+  </p>
+  <div *ngFor="let i of likes" class="image">
+    <img [src]="i" alt="session result" />
+  </div>
+</div>
+
+<!-- <div *ngFor="let session of sessionList">
 
     <div>
         <img [src]="session.item.imageUrl">
@@ -9,4 +45,4 @@
     <button (click)="changeImage()">Not Interested</button>
 
 
-</div>
+</div> -->
