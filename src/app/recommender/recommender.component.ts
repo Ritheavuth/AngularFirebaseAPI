@@ -27,7 +27,7 @@ export class RecommenderComponent implements OnInit {
     this.sessionService.getSession().subscribe(data => {
       this.sessionList = data;
       console.log(this.sessionList.session);
-      this.filterSession("education", "Japan", "Software");
+      this.filterSession("education", "America", "Software");
     })
   }
 
@@ -49,18 +49,13 @@ export class RecommenderComponent implements OnInit {
   }
 
   like() {
-    this.likes.push(this.images[this.i]);
-    // this.dataService.addLikes(this.images[this.i]);
-    this.images.splice(this.i, 1);
-
-    // console.log(this.images);
+    this.likes.push(this.filteredSessions[this.i].session);
+    this.i++;
     console.log(this.likes);
   }
 
   dislike() {
-    this.images.splice(this.i, 1);
-
-    // console.log(this.images);
+    this.i++;
     console.log(this.likes);
   }
 }
