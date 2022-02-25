@@ -11,11 +11,13 @@ import { SessionService } from 'src/services/session.service';
 })
 export class RecommenderComponent implements OnInit {
 
-  sessionList: any;
+  sessionList: any = [];
+  filteredSessions: any = [];
   i = 0;
   images: string[] = [];
   likes: any[] = [];
-  constructor(private sessionService: SessionService, private http: HttpClient, private router: Router) { }
+  constructor(private sessionService: SessionService, private http: HttpClient, private router: Router) {
+  }
 
   ngOnInit(): void {
     this.getAllSession();
@@ -24,12 +26,19 @@ export class RecommenderComponent implements OnInit {
   getAllSession() {
     this.sessionService.getSession().subscribe(data => {
       this.sessionList = data;
-      console.log(this.sessionList);
-      this.getAllImages();
+      console.log(this.sessionList.session);
+      this.filterSession("education", "Japan", "Software");
     })
   }
-  changeImage() {
-    this.i ++;
+
+  filterSession(category: string, location: string, businessArea: string) {
+    const categoryList = this.sessionList.filter((element:any) => element.session.category === category);
+    const locationList = this.sessionList.filter((element:any) => element.session.location === location);
+    const businessAreaList = this.sessionList.filter((element:any) => element.session.businessArea === businessArea);
+    this.filteredSessions = categoryList.concat(locationList).concat(businessAreaList).filter(function(elem:any, index:any, self:any) {
+      return index === self.indexOf(elem);
+    });
+    console.log(this.filteredSessions);
   }
 
   getAllImages() {
@@ -44,16 +53,12 @@ export class RecommenderComponent implements OnInit {
     // this.dataService.addLikes(this.images[this.i]);
     this.images.splice(this.i, 1);
 
-    // if (this.images.length == 0) { this.router.navigate(['result'])}
-
     // console.log(this.images);
     console.log(this.likes);
   }
 
   dislike() {
     this.images.splice(this.i, 1);
-
-    // if (this.images.length == 0) { this.router.navigate(['result'])}
 
     // console.log(this.images);
     console.log(this.likes);
