@@ -9,7 +9,7 @@ export class SessionService {
 
   constructor(private http:HttpClient, private router:Router) { }
   toURL:string = "http://localhost:5001/kirirom-forum-chatbot/us-central1/app/api/sessions";
-  categoryURL:string = "http://localhost:5001/kirirom-forum-chatbot/us-central1/app/api/sessions/location="
+  categoryURL:string = "http://localhost:5001/kirirom-forum-chatbot/us-central1/app/api/sessions/category="
   businessAreaURL:string = "http://localhost:5001/kirirom-forum-chatbot/us-central1/app/api/sessions/business-area="
   locationURL:string = "http://localhost:5001/kirirom-forum-chatbot/us-central1/app/api/sessions/location="
   getSession(){
@@ -24,7 +24,7 @@ export class SessionService {
     return this.http.get(this.locationURL+location);
   }
 
-  
+
   filterSessionBusinessArea(businessArea:string){
     return this.http.get(this.businessAreaURL+businessArea);
   }

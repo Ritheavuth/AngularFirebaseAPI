@@ -26,3 +26,8 @@ img {
   padding-left: auto;
   float: left;
 }
+
+.container {
+  width: 45%;
+  margin: 30px auto;
+}
