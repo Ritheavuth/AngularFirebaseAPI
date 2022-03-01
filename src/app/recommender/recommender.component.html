@@ -13,9 +13,9 @@
         <mat-card-title>{{
           filteredSessions[this.i].session.title
         }}</mat-card-title>
-        <!-- <mat-card-subtitle>{{
-          filteredSessions[this.i].session.business-area
-        }}</mat-card-subtitle> -->
+        <mat-card-subtitle>{{
+          filteredSessions[this.i].session.businessArea
+        }}</mat-card-subtitle>
         <mat-card-subtitle>{{
           filteredSessions[this.i].session.category
         }}</mat-card-subtitle>
@@ -52,9 +52,7 @@
     <mat-card *ngFor="let item of likes" class="container">
       <mat-card-header>
         <mat-card-title>{{ item.title }}</mat-card-title>
-        <!-- <mat-card-subtitle>{{
-          filteredSessions[this.i].session.business-area
-        }}</mat-card-subtitle> -->
+        <mat-card-subtitle>{{ item.businessArea }}</mat-card-subtitle>
         <mat-card-subtitle>{{ item.category }}</mat-card-subtitle>
         <mat-card-subtitle>{{ item.location }}</mat-card-subtitle>
       </mat-card-header>
