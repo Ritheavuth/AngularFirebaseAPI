@@ -48,10 +48,12 @@ export class RecommenderComponent implements OnInit {
     const categoryList = this.sessionList.filter((element:any) => element.session.category === category);
     const locationList = this.sessionList.filter((element:any) => element.session.location === location);
     const businessAreaList = this.sessionList.filter((element:any) => element.session.businessArea === businessArea);
-    this.filteredSessions = categoryList.concat(locationList).concat(businessAreaList).filter(function(elem:any, index:any, self:any) {
+    const res = categoryList.concat(locationList).concat(businessAreaList).filter(function(elem:any, index:any, self:any) {
       return index === self.indexOf(elem);
       
     });
+    console.log(res);
+    this.filteredSessions = res.slice(0, 10);
     console.log(this.filteredSessions);
   }
 
