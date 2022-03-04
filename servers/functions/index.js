@@ -42,6 +42,31 @@ app.get('/api/sessions', (req, res) => {
       }
       })();
   });
+
+  // User's answers
+
+  app.get('/api/users', (req, res) => {
+    (async () => {
+        try {
+            let query = db.collection('users');
+            let response = [];
+            await query.get().then(querySnapshot => {
+            let docs = querySnapshot.docs;
+            for (let doc of docs) {
+                const selectedItem = {
+                    answer: doc.data()
+                };
+                response.push(selectedItem);
+            }
+            });
+            return res.status(200).send(response);
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send(error);
+        }
+        })();
+    });
+
   // Filter for category = [education, business, issue, technology]
   
   app.get('/api/sessions/category=education', (req, res) => {

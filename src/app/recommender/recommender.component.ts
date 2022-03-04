@@ -11,6 +11,12 @@ import { SessionService } from 'src/services/session.service';
 })
 export class RecommenderComponent implements OnInit {
 
+  userList: any = [];
+  user_1: any = this.userList[0];
+  user_2: any = this.userList[1];
+  category: string = "";
+  location: string = "";
+
   sessionList: any = [];
   filteredSessions: any = [];
   i = 0;
@@ -21,13 +27,20 @@ export class RecommenderComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllSession();
+    this.getUsersAnswer();
   }
+
+  getUsersAnswer() {
+    this.sessionService.getAnswer().subscribe(data => {
+      this.userList = data;
+      this.filterSession(this.userList[0].answer.category.toString(), this.userList[0].answer.region.toString(), this.userList[0].answer.businessArea.toString());
+    })
+  } 
 
   getAllSession() {
     this.sessionService.getSession().subscribe(data => {
       this.sessionList = data;
       console.log(this.sessionList.session);
-      this.filterSession("education", "America", "Software");
     })
   }
 
@@ -37,6 +50,7 @@ export class RecommenderComponent implements OnInit {
     const businessAreaList = this.sessionList.filter((element:any) => element.session.businessArea === businessArea);
     this.filteredSessions = categoryList.concat(locationList).concat(businessAreaList).filter(function(elem:any, index:any, self:any) {
       return index === self.indexOf(elem);
+      
     });
     console.log(this.filteredSessions);
   }
