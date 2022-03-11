@@ -35,7 +35,7 @@ export class RecommenderComponent implements OnInit {
       this.userList = data;
       this.filterSession(this.userList[0].answer.category.toString(), this.userList[0].answer.region.toString(), this.userList[0].answer.businessArea.toString());
     })
-  } 
+  }
 
   getAllSession() {
     this.sessionService.getSession().subscribe(data => {
@@ -50,7 +50,7 @@ export class RecommenderComponent implements OnInit {
     const businessAreaList = this.sessionList.filter((element:any) => element.session.businessArea === businessArea);
     const res = categoryList.concat(locationList).concat(businessAreaList).filter(function(elem:any, index:any, self:any) {
       return index === self.indexOf(elem);
-      
+
     });
     console.log(res);
     this.filteredSessions = res.slice(0, 10);
