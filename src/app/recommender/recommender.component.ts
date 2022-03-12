@@ -27,20 +27,20 @@ export class RecommenderComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllSession();
-    this.getUsersAnswer();
   }
 
   getUsersAnswer() {
     this.sessionService.getAnswer().subscribe(data => {
       this.userList = data;
-      this.filterSession(this.userList[0].answer.category.toString(), this.userList[0].answer.region.toString(), this.userList[0].answer.businessArea.toString());
+      this.filterSession(this.userList[0].answer.category.toString(), this.userList[0].answer.location.toString(), this.userList[0].answer.businessArea.toString());
     })
   }
 
   getAllSession() {
     this.sessionService.getSession().subscribe(data => {
       this.sessionList = data;
-      console.log(this.sessionList.session);
+      console.log(this.sessionList);
+      this.getUsersAnswer();
     })
   }
 
@@ -53,7 +53,7 @@ export class RecommenderComponent implements OnInit {
 
     });
     console.log(res);
-    this.filteredSessions = res.slice(0, 10);
+    this.filteredSessions = res.slice(0, 10); //limit filtered sessions to only 10
     console.log(this.filteredSessions);
   }
 
