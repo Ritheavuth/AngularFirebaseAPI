@@ -8,15 +8,15 @@ import { Router } from '@angular/router';
 export class SessionService {
 
   constructor(private http:HttpClient, private router:Router) { }
-  toURL:string = "http://localhost:5001/kirirom-forum-chatbot/us-central1/app/api/sessions";
-  answerURL:string = "http://localhost:5001/kirirom-forum-chatbot/us-central1/app/api/users";
-  categoryURL:string = "http://localhost:5001/kirirom-forum-chatbot/us-central1/app/api/sessions/category="
-  businessAreaURL:string = "http://localhost:5001/kirirom-forum-chatbot/us-central1/app/api/sessions/business-area="
-  locationURL:string = "http://localhost:5001/kirirom-forum-chatbot/us-central1/app/api/sessions/location="
+  toURL:string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/sessions";
+  answerURL:string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/users";
+  categoryURL:string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/sessions/category="
+  businessAreaURL:string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/sessions/business-area="
+  locationURL:string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/sessions/location="
   getSession(){
     return this.http.get(this.toURL);
   }
-  
+
   getAnswer() {
     return this.http.get(this.answerURL)
   }
