@@ -18,6 +18,7 @@ import {
 } from 'angularx-social-login';
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
+import { EventService } from './services/event.service';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { AuthGuardService } from './services/auth-guard.service';
   providers: [
     AuthService,
     AuthGuardService,
+    EventService,
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {

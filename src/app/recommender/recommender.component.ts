@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { SessionService } from 'src/services/session.service';
+import { EventService } from '../services/event.service';
 
 
 @Component({
@@ -23,11 +24,12 @@ export class RecommenderComponent implements OnInit {
   images: string[] = [];
   likes: any[] = [];
 
-  constructor(private sessionService: SessionService, private http: HttpClient, private router: Router) {
+  constructor(private sessionService: SessionService, private http: HttpClient, private router: Router, private eventService: EventService) {
   }
 
   ngOnInit(): void {
-    this.getAllSession();
+    this.sessionList = this.eventService.getAllSessions();
+    this.getUsersAnswer();
   }
 
   getUsersAnswer() {
@@ -37,13 +39,13 @@ export class RecommenderComponent implements OnInit {
     })
   }
 
-  getAllSession() {
-    this.sessionService.getSession().subscribe(data => {
-      this.sessionList = data;
-      console.log(this.sessionList);
-      this.getUsersAnswer();
-    })
-  }
+  // getAllSession() {
+  //   this.sessionService.getSession().subscribe(data => {
+  //     this.sessionList = data;
+  //     console.log(this.sessionList);
+  //     this.getUsersAnswer();
+  //   })
+  // }
 
   filterSession(category: string, location: string, businessArea: string) {
     const categoryList = this.sessionList.filter((element:any) => element.session.category === category);
