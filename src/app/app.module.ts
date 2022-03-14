@@ -17,6 +17,7 @@ import {
   SocialAuthServiceConfig,
 } from 'angularx-social-login';
 import { AuthService } from './services/auth.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { AuthService } from './services/auth.service';
   ],
   providers: [
     AuthService,
+    AuthGuardService,
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {

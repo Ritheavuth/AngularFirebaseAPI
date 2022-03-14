@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { SocialAuthService, FacebookLoginProvider, SocialUser } from 'angularx-social-login';
 
 @Injectable({
@@ -7,8 +8,9 @@ import { SocialAuthService, FacebookLoginProvider, SocialUser } from 'angularx-s
 export class AuthService {
   isSignedin: boolean = false;
   user: SocialUser = new SocialUser;
+  public redirectUrl: string = '';
 
-  constructor(private socialAuthService: SocialAuthService) {
+  constructor(private socialAuthService: SocialAuthService, private router: Router) {
     this.authState();
   }
 
@@ -20,8 +22,14 @@ export class AuthService {
     });
   }
 
+  isLoggedIn(): boolean {
+    return this.isSignedin;
+  }
+
   facebookSignin(): void {
     this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    this.isSignedin = true;
+    this.router.navigate([this.redirectUrl]);
   }
 
   logOut(): void {
