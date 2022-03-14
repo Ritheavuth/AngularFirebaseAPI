@@ -1,9 +1,8 @@
-<div *ngIf="!isSignedin">
-  <button
-    type="button"
-    (click)="facebookSignin()"
-    class="btn btn-primary btn-block"
-  >
+<div *ngIf="!isSignedin" class="fb-button">
+  <button mat-raised-button color="primary" (click)="facebookSignin()">
+    <mat-icon aria-hidden="false" aria-label="Example home icon"
+      >facebook</mat-icon
+    >
     Login with Facebook
   </button>
 </div>

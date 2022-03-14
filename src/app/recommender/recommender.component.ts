@@ -36,7 +36,7 @@ export class RecommenderComponent implements OnInit {
       this.isSignedin = (user != null);
       console.log(this.user);
     });
-    this.facebookSignin();
+    // this.facebookSignin();
     this.getAllSession();
   }
 
