@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { SessionService } from 'src/services/session.service';
+import { SocialAuthService, FacebookLoginProvider, SocialUser } from 'angularx-social-login';
 
 
 @Component({
@@ -22,10 +23,20 @@ export class RecommenderComponent implements OnInit {
   i = 0;
   images: string[] = [];
   likes: any[] = [];
-  constructor(private sessionService: SessionService, private http: HttpClient, private router: Router) {
+
+  isSignedin: boolean = false;
+  user: SocialUser = new SocialUser;
+
+  constructor(private sessionService: SessionService, private http: HttpClient, private router: Router, private socialAuthService: SocialAuthService) {
   }
 
   ngOnInit(): void {
+    this.socialAuthService.authState.subscribe((user) => {
+      this.user = user;
+      this.isSignedin = (user != null);
+      console.log(this.user);
+    });
+    this.facebookSignin();
     this.getAllSession();
   }
 
@@ -73,5 +84,13 @@ export class RecommenderComponent implements OnInit {
   dislike() {
     this.i++;
     console.log(this.likes);
+  }
+
+  facebookSignin(): void {
+    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
+
+  logOut(): void {
+    this.socialAuthService.signOut();
   }
 }
