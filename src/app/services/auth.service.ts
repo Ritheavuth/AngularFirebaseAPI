@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SocialAuthService, FacebookLoginProvider, SocialUser } from 'angularx-social-login';
 
@@ -27,9 +28,12 @@ export class AuthService {
   }
 
   facebookSignin(): void {
-    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
-    this.isSignedin = true;
-    this.router.navigate([this.redirectUrl]);
+    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then(
+      onfulfilled => {
+        this.isSignedin = true;
+        this.router.navigate([this.redirectUrl]);
+      }
+    );
   }
 
   logOut(): void {

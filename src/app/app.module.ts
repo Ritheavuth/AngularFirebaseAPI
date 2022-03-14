@@ -45,7 +45,7 @@ import { AuthGuardService } from './services/auth-guard.service';
         providers: [
           {
             id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('459781535882233'),
+            provider: new FacebookLoginProvider('665744008042564'),
           },
         ],
       } as SocialAuthServiceConfig,
