@@ -39,6 +39,10 @@ img {
   margin: 30px auto;
 }
 
+mat-card-title {
+  padding-bottom: 10px;
+}
+
 .interest {
   /* width: 100%; */
   display: flex;
