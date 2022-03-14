@@ -6,7 +6,7 @@ import { RecommenderComponent } from './recommender/recommender.component';
 const routes: Routes = [
   // {path: '', redirectTo: 'recommender', pathMatch: 'full'},
   {
-    path: '/login',
+    path: 'login',
     component: LoginComponent
   },
   {path: '', component: RecommenderComponent}
