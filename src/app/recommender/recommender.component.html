@@ -1,11 +1,9 @@
 <div *ngIf="i < filteredSessions.length">
   <br />
-  <p style="text-align: center; font-size: 20px">
-    Are you interested / planning to join this event?
-  </p>
+  <p class="title">Are you interested / planning to join this event?</p>
   <!-- <div class="image">
-    <img [src]="images[i]" alt="session recommendation" id="sessionimage" />
-  </div> -->
+      <img [src]="images[i]" alt="session recommendation" id="sessionimage" />
+    </div> -->
   <div class="container">
     <mat-card>
       <mat-card-header>
@@ -25,7 +23,7 @@
       </mat-card-header>
     </mat-card>
   </div>
-  <div style="margin-left: 30%">
+  <div class="interest">
     <div class="left">
       <button class="join" id="btnj" (click)="like()">✓</button>
     </div>
@@ -42,13 +40,11 @@
 
 <div *ngIf="i == filteredSessions.length">
   <br />
-  <p *ngIf="likes.length == 0" style="text-align: center; font-size: 20px">
+  <p *ngIf="likes.length == 0" class="title">
     You didn't like any of the events yet.
   </p>
   <div *ngIf="likes.length > 0">
-    <p style="text-align: center; font-size: 20px">
-      Here are the events that you liked:
-    </p>
+    <p class="title">Here are the events that you liked:</p>
     <mat-card *ngFor="let item of likes" class="container">
       <mat-card-header>
         <mat-card-title>{{ item.title }}</mat-card-title>

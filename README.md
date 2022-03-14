@@ -2,9 +2,17 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.0.
 
+## Getting Started
+
+Run `npm install` to install dependencies needed for Front-end.
+
+Then go to `cd servers/functions` and run `npm install` to install dependencies required to run Backend Server.
+
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Go to `cd servers/functions` to navigate to backend file and Run `npm run serve` to run the backend locally.
+
+Come back to Main Directory and run `ng serve` for frontend site. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
@@ -13,6 +21,10 @@ Run `ng generate component component-name` to generate a new component. You can 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+## Hosting
+
+Run `firebase deploy` after building the project to apply changes onto live website.
 
 ## Running unit tests
 
