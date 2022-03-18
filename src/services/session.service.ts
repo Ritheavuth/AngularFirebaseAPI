@@ -9,28 +9,33 @@ export class SessionService {
 
   constructor(private http:HttpClient, private router:Router) { }
   toURL:string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/sessions";
-  answerURL:string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/users";
-  categoryURL:string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/sessions/category="
-  businessAreaURL:string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/sessions/business-area="
-  locationURL:string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/sessions/location="
+  psid: string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/User"
+  // answerURL:string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/users";
+  // categoryURL:string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/sessions/category="
+  // businessAreaURL:string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/sessions/business-area="
+  // locationURL:string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/sessions/location="
   getSession(){
     return this.http.get(this.toURL);
   }
 
-  getAnswer() {
-    return this.http.get(this.answerURL)
+  getAllUsers(){
+    return this.http.get(this.psid);
   }
 
-  filterSessionCategory(category:string){
-    return this.http.get(this.categoryURL+category);
-  }
+  // getAnswer() {
+  //   return this.http.get(this.answerURL)
+  // }
 
-  filterSessionLocation(location:string){
-    return this.http.get(this.locationURL+location);
-  }
+  // filterSessionCategory(category:string){
+  //   return this.http.get(this.categoryURL+category);
+  // }
+
+  // filterSessionLocation(location:string){
+  //   return this.http.get(this.locationURL+location);
+  // }
 
 
-  filterSessionBusinessArea(businessArea:string){
-    return this.http.get(this.businessAreaURL+businessArea);
-  }
+  // filterSessionBusinessArea(businessArea:string){
+  //   return this.http.get(this.businessAreaURL+businessArea);
+  // }
 }
