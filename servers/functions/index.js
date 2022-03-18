@@ -82,17 +82,19 @@ app.get('/api/sessions', (req, res) => {
             })();
         });
 
-    // Post to specific user
-    app.post('/api/create', (req, res) => {
-        (async () => {
-            try {
-            await db.collection('items').doc('/' + req.body.id + '/')
-                .create({item: req.body.item});
+    // update specific user
+app.put('/api/update/User/:psid', (req, res) => {
+    (async () => {
+        try {
+            const document = db.collection('User').doc(req.params.psid);
+            await document.update({
+                interest: req.body.interest,
+            });
             return res.status(200).send();
-            } catch (error) {
+        } catch (error) {
             console.log(error);
             return res.status(500).send(error);
-            }
+        }
         })();
     });
 

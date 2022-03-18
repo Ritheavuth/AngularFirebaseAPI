@@ -17,7 +17,6 @@ export class RecommenderComponent implements OnInit {
   category: string = "";
   location: string = "";
   user: any;
-
   sessionList: any = [];
   filteredSessions: any = [];
   i = 0;
@@ -29,17 +28,14 @@ export class RecommenderComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllSession();
+    this.getSpecUser("4912192158842648");   
     // this.getUsersAnswer();
     // this.user = this.authService.getUser();
   }
 
-  // getUsersAnswer() {
-  //   this.sessionService.getAnswer().subscribe(data => {
-  //     this.userList = data;
-  //     console.log(this.userList);
-  //     this.filterSession(this.userList[0].answer.category.toString(), this.userList[0].answer.location.toString(), this.userList[0].answer.businessArea.toString());
-  //   })
-  // }
+  getUsersAnswer() {
+    this.filterSession(this.user.category.toString(), this.user.location.toString(), this.user.businessArea.toString());
+  }
 
   getAllSession() {
     this.sessionService.getSession().subscribe(data => {
@@ -47,6 +43,15 @@ export class RecommenderComponent implements OnInit {
       console.log(this.sessionList);
       // this.getUsersAnswer();
     })
+  }
+
+  getSpecUser(user_psid: string) {
+    this.sessionService.getUser(user_psid).subscribe(data => {
+      this.user = data;
+      console.log(this.user);
+      this.filterSession(this.user.category.toString(), this.user.location.toString(), this.user.businessArea.toString());
+      console.log(this.filteredSessions);
+    })    
   }
 
   filterSession(category: string, location: string, businessArea: string) {
@@ -57,9 +62,14 @@ export class RecommenderComponent implements OnInit {
       return index === self.indexOf(elem);
 
     });
-    console.log(res);
     this.filteredSessions = res.slice(0, 10); //limit filtered sessions to only 10
-    console.log(this.filteredSessions);
+  }
+
+  updateUser() {
+    this.sessionService.getUpdateUser("4912192158842648", this.user).subscribe(data => {
+
+      console.log(data);
+    })
   }
 
   getAllImages() {
@@ -73,6 +83,9 @@ export class RecommenderComponent implements OnInit {
     this.likes.push(this.filteredSessions[this.i].session);
     this.i++;
     console.log(this.likes);
+    this.user.interest = this.likes
+    console.log(this.user); 
+    this.updateUser();    
   }
 
   dislike() {

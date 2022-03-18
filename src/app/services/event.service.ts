@@ -20,4 +20,8 @@ export class EventService {
   getAllSessions() {
     return this.sessionList;
   }
+
+  getAllUserID() {
+    
+  }
 }

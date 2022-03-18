@@ -9,7 +9,8 @@ export class SessionService {
 
   constructor(private http:HttpClient, private router:Router) { }
   toURL:string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/sessions";
-  psid: string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/User"
+  psid: string = "http://localhost:5001/kirirom-forum-chatbot/us-central1/app/api/User";
+  updateUser:string = "http://localhost:5001/kirirom-forum-chatbot/us-central1/app/api/update/User"
   // answerURL:string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/users";
   // categoryURL:string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/sessions/category="
   // businessAreaURL:string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/sessions/business-area="
@@ -20,6 +21,15 @@ export class SessionService {
 
   getAllUsers(){
     return this.http.get(this.psid);
+  }
+
+  getUser(user_psid:string){
+    console.log(user_psid)
+    return this.http.get(this.psid + "/" + user_psid);
+  }
+
+  getUpdateUser(user_psid:string, user:any){
+    return this.http.put(this.updateUser + "/" + user_psid, user);
   }
 
   // getAnswer() {
