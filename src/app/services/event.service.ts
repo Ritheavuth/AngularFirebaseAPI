@@ -13,7 +13,7 @@ export class EventService {
   requestSessions(){
     this.sessionService.getSession().subscribe(data => {
       this.sessionList = data;
-      console.log(this.sessionList);
+      // console.log(this.sessionList);
     })
   }
 

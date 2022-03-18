@@ -12,8 +12,9 @@ const routes: Routes = [
   },
   {
     path: '',
-    canActivate: [AuthGuardService],
-  component: RecommenderComponent}
+    // canActivate: [AuthGuardService],
+    component: RecommenderComponent
+  }
 ];
 
 @NgModule({

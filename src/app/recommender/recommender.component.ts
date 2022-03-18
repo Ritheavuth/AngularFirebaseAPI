@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { SessionService } from 'src/services/session.service';
-import { EventService } from '../services/event.service';
 
 
 @Component({
@@ -17,6 +16,7 @@ export class RecommenderComponent implements OnInit {
   user_2: any = this.userList[1];
   category: string = "";
   location: string = "";
+  user: any;
 
   sessionList: any = [];
   filteredSessions: any = [];
@@ -24,28 +24,30 @@ export class RecommenderComponent implements OnInit {
   images: string[] = [];
   likes: any[] = [];
 
-  constructor(private sessionService: SessionService, private http: HttpClient, private router: Router, private eventService: EventService) {
+  constructor(private sessionService: SessionService, private http: HttpClient, private router: Router) {
   }
 
   ngOnInit(): void {
-    this.sessionList = this.eventService.getAllSessions();
-    this.getUsersAnswer();
+    this.getAllSession();
+    // this.getUsersAnswer();
+    // this.user = this.authService.getUser();
   }
 
-  getUsersAnswer() {
-    this.sessionService.getAnswer().subscribe(data => {
-      this.userList = data;
-      this.filterSession(this.userList[0].answer.category.toString(), this.userList[0].answer.location.toString(), this.userList[0].answer.businessArea.toString());
-    })
-  }
-
-  // getAllSession() {
-  //   this.sessionService.getSession().subscribe(data => {
-  //     this.sessionList = data;
-  //     console.log(this.sessionList);
-  //     this.getUsersAnswer();
+  // getUsersAnswer() {
+  //   this.sessionService.getAnswer().subscribe(data => {
+  //     this.userList = data;
+  //     console.log(this.userList);
+  //     this.filterSession(this.userList[0].answer.category.toString(), this.userList[0].answer.location.toString(), this.userList[0].answer.businessArea.toString());
   //   })
   // }
+
+  getAllSession() {
+    this.sessionService.getSession().subscribe(data => {
+      this.sessionList = data;
+      console.log(this.sessionList);
+      // this.getUsersAnswer();
+    })
+  }
 
   filterSession(category: string, location: string, businessArea: string) {
     const categoryList = this.sessionList.filter((element:any) => element.session.category === category);
