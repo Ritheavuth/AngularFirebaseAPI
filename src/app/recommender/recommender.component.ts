@@ -28,7 +28,6 @@ export class RecommenderComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllSession();
-    this.getSpecUser("4912192158842648");   
     // this.getUsersAnswer();
     // this.user = this.authService.getUser();
   }
@@ -41,6 +40,7 @@ export class RecommenderComponent implements OnInit {
     this.sessionService.getSession().subscribe(data => {
       this.sessionList = data;
       console.log(this.sessionList);
+      this.getSpecUser("4912192158842648");
       // this.getUsersAnswer();
     })
   }
@@ -51,7 +51,7 @@ export class RecommenderComponent implements OnInit {
       console.log(this.user);
       this.filterSession(this.user.category.toString(), this.user.location.toString(), this.user.businessArea.toString());
       console.log(this.filteredSessions);
-    })    
+    })
   }
 
   filterSession(category: string, location: string, businessArea: string) {
@@ -84,8 +84,8 @@ export class RecommenderComponent implements OnInit {
     this.i++;
     console.log(this.likes);
     this.user.interest = this.likes
-    console.log(this.user); 
-    this.updateUser();    
+    console.log(this.user);
+    this.updateUser();
   }
 
   dislike() {
