@@ -11,11 +11,6 @@ import { SessionService } from 'src/services/session.service';
 })
 export class RecommenderComponent implements OnInit {
 
-  // userList: any = [];
-  // user_1: any = this.userList[0];
-  // user_2: any = this.userList[1];
-  // category: string = "";
-  // location: string = "";
   id: any;
   user: any;
   sessionList: any = [];
@@ -28,7 +23,7 @@ export class RecommenderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.id = this.activatedRoute.snapshot.paramMap.get("id");
+    this.id = this.activatedRoute.snapshot.paramMap.get("id")?.toString();
     this.getAllSession();
     // this.user = this.authService.getUser();
   }
@@ -66,9 +61,8 @@ export class RecommenderComponent implements OnInit {
   }
 
   updateUser() {
-    this.sessionService.getUpdateUser("4912192158842648", this.user).subscribe(data => {
-
-      console.log(data);
+    this.sessionService.getUpdateUser(this.id, this.user).subscribe(data => {
+      // console.log(data);
     })
   }
 
@@ -82,14 +76,14 @@ export class RecommenderComponent implements OnInit {
   like() {
     this.likes.push(this.filteredSessions[this.i].session);
     this.i++;
-    console.log(this.likes);
+    // console.log(this.likes);
     this.user.interest = this.likes
-    console.log(this.user);
+    // console.log(this.user);
     this.updateUser();
   }
 
   dislike() {
     this.i++;
-    console.log(this.likes);
+    // console.log(this.likes);
   }
 }
