@@ -9,28 +9,23 @@ export class SessionService {
 
   constructor(private http:HttpClient, private router:Router) { }
   toURL:string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/sessions";
-  answerURL:string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/users";
-  categoryURL:string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/sessions/category="
-  businessAreaURL:string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/sessions/business-area="
-  locationURL:string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/sessions/location="
+  psid: string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/User";
+  updateUser:string = "https://us-central1-kirirom-forum-chatbot.cloudfunctions.net/app/api/update/User"
+
   getSession(){
     return this.http.get(this.toURL);
   }
 
-  getAnswer() {
-    return this.http.get(this.answerURL)
+  getAllUsers(){
+    return this.http.get(this.psid);
   }
 
-  filterSessionCategory(category:string){
-    return this.http.get(this.categoryURL+category);
+  getUser(user_psid:string){
+    console.log(user_psid)
+    return this.http.get(this.psid + "/" + user_psid);
   }
 
-  filterSessionLocation(location:string){
-    return this.http.get(this.locationURL+location);
-  }
-
-
-  filterSessionBusinessArea(businessArea:string){
-    return this.http.get(this.businessAreaURL+businessArea);
+  getUpdateUser(user_psid:string, user:any){
+    return this.http.put(this.updateUser + "/" + user_psid, user);
   }
 }

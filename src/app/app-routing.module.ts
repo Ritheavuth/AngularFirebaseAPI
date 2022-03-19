@@ -6,14 +6,15 @@ import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
   // {path: '', redirectTo: 'recommender', pathMatch: 'full'},
+  // {
+  //   path: 'login',
+  //   component: LoginComponent
+  // },
   {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: '',
-    canActivate: [AuthGuardService],
-  component: RecommenderComponent}
+    path: ':id',
+    // canActivate: [AuthGuardService],
+    component: RecommenderComponent
+  }
 ];
 
 @NgModule({

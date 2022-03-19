@@ -43,18 +43,18 @@ app.get('/api/sessions', (req, res) => {
       })();
   });
 
-  // User's answers
-
-  app.get('/api/users', (req, res) => {
+  // read all user
+  app.get('/api/User', (req, res) => {
     (async () => {
         try {
-            let query = db.collection('users');
+            let query = db.collection('User');
             let response = [];
             await query.get().then(querySnapshot => {
             let docs = querySnapshot.docs;
             for (let doc of docs) {
                 const selectedItem = {
-                    answer: doc.data()
+                    "psid" : doc.id,
+                    "answers" : doc.data()
                 };
                 response.push(selectedItem);
             }
@@ -67,243 +67,30 @@ app.get('/api/sessions', (req, res) => {
         })();
     });
 
-  // Filter for category = [education, business, issue, technology]
-  
-  app.get('/api/sessions/category=education', (req, res) => {
-    (async () => {
-        try {
-            let query = db.collection('kgf22-session');
-            let response = [];
-            await query.get().then(querySnapshot => {
-            let docs = querySnapshot.docs;
-            for (let doc of docs) {
-                if (doc.data().category == "education") {
-                    const selectedItem = {
-                        session: doc.data()
-                    };
-                    response.push(selectedItem);
-                } 
+    // read specific user
+    app.get('/api/User/:psid', (req, res) => {
+        (async () => {
+            try {
+                const document = db.collection('User').doc(req.params.psid);
+                let item = await document.get();
+                let response = item.data();
+                return res.status(200).send(response);
+            } catch (error) {
+                console.log(error);
+                return res.status(500).send(error);
             }
-            });
-            return res.status(200).send(response);
-        } catch (error) {
-            console.log(error);
-            return res.status(500).send(error);
-        }
-        })();
-    });
+            })();
+        });
 
-  app.get('/api/sessions/category=business', (req, res) => {
+    // update specific user
+app.put('/api/update/User/:psid', (req, res) => {
     (async () => {
         try {
-            let query = db.collection('kgf22-session');
-            let response = [];
-            await query.get().then(querySnapshot => {
-            let docs = querySnapshot.docs;
-            for (let doc of docs) {
-                if (doc.data().category == "business") {
-                    const selectedItem = {
-                        session: doc.data()
-                    };
-                    response.push(selectedItem);
-                } 
-            }
+            const document = db.collection('User').doc(req.params.psid);
+            await document.update({
+                interest: req.body.interest,
             });
-            return res.status(200).send(response);
-        } catch (error) {
-            console.log(error);
-            return res.status(500).send(error);
-        }
-        })();
-    });
-
-  app.get('/api/sessions/category=issue', (req, res) => {
-    (async () => {
-        try {
-            let query = db.collection('kgf22-session');
-            let response = [];
-            await query.get().then(querySnapshot => {
-            let docs = querySnapshot.docs;
-            for (let doc of docs) {
-                if (doc.data().category == "issue") {
-                    const selectedItem = {
-                        session: doc.data()
-                    };
-                    response.push(selectedItem);
-                } 
-            }
-            });
-            return res.status(200).send(response);
-        } catch (error) {
-            console.log(error);
-            return res.status(500).send(error);
-        }
-        })();
-    });
-
-  app.get('/api/sessions/category=technology', (req, res) => {
-    (async () => {
-        try {
-            let query = db.collection('kgf22-session');
-            let response = [];
-            await query.get().then(querySnapshot => {
-            let docs = querySnapshot.docs;
-            for (let doc of docs) {
-                if (doc.data().category == "technology") {
-                    const selectedItem = {
-                        session: doc.data()
-                    };
-                    response.push(selectedItem);
-                } 
-            }
-            });
-            return res.status(200).send(response);
-        } catch (error) {
-            console.log(error);
-            return res.status(500).send(error);
-        }
-        })();
-    });
-
-    // Filter for location = [Japan, America, Africa, Asia, Europe]
-  app.get('/api/sessions/location=Japan', (req, res) => {
-    (async () => {
-        try {
-            let query = db.collection('kgf22-session');
-            let response = [];
-            await query.get().then(querySnapshot => {
-            let docs = querySnapshot.docs;
-            for (let doc of docs) {
-                if (doc.data().location == "Japan") {
-                    const selectedItem = {
-                        session: doc.data()
-                    };
-                    response.push(selectedItem);
-                } 
-            }
-            });
-            return res.status(200).send(response);
-        } catch (error) {
-            console.log(error);
-            return res.status(500).send(error);
-        }
-        })();
-    });
-
-  app.get('/api/sessions/location=America', (req, res) => {
-    (async () => {
-        try {
-            let query = db.collection('kgf22-session');
-            let response = [];
-            await query.get().then(querySnapshot => {
-            let docs = querySnapshot.docs;
-            for (let doc of docs) {
-                if (doc.data().location == "America") {
-                    const selectedItem = {
-                        session: doc.data()
-                    };
-                    response.push(selectedItem);
-                } 
-            }
-            });
-            return res.status(200).send(response);
-        } catch (error) {
-            console.log(error);
-            return res.status(500).send(error);
-        }
-        })();
-    });
-
-  app.get('/api/sessions/location=Asia', (req, res) => {
-    (async () => {
-        try {
-            let query = db.collection('kgf22-session');
-            let response = [];
-            await query.get().then(querySnapshot => {
-            let docs = querySnapshot.docs;
-            for (let doc of docs) {
-                if (doc.data().location == "Asia") {
-                    const selectedItem = {
-                        session: doc.data()
-                    };
-                    response.push(selectedItem);
-                } 
-            }
-            });
-            return res.status(200).send(response);
-        } catch (error) {
-            console.log(error);
-            return res.status(500).send(error);
-        }
-        })();
-    });
-
-  app.get('/api/sessions/location=Africa', (req, res) => {
-    (async () => {
-        try {
-            let query = db.collection('kgf22-session');
-            let response = [];
-            await query.get().then(querySnapshot => {
-            let docs = querySnapshot.docs;
-            for (let doc of docs) {
-                if (doc.data().location == "Africa") {
-                    const selectedItem = {
-                        session: doc.data()
-                    };
-                    response.push(selectedItem);
-                } 
-            }
-            });
-            return res.status(200).send(response);
-        } catch (error) {
-            console.log(error);
-            return res.status(500).send(error);
-        }
-        })();
-    });
-
-  app.get('/api/sessions/location=Europe', (req, res) => {
-    (async () => {
-        try {
-            let query = db.collection('kgf22-session');
-            let response = [];
-            await query.get().then(querySnapshot => {
-            let docs = querySnapshot.docs;
-            for (let doc of docs) {
-                if (doc.data().location == "Europe") {
-                    const selectedItem = {
-                        session: doc.data()
-                    };
-                    response.push(selectedItem);
-                } 
-            }
-            });
-            return res.status(200).send(response);
-        } catch (error) {
-            console.log(error);
-            return res.status(500).send(error);
-        }
-        })();
-    });
-
-  app.get('/api/sessions/business-area=', (req, res) => {
-    (async () => {
-        try {
-            let query = db.collection('kgf22-session');
-            let name = "business-area";
-            let response = [];
-            await query.get().then(querySnapshot => {
-            let docs = querySnapshot.docs;
-            for (let doc of docs) {
-                if (doc.data().name == "Europe") {
-                    const selectedItem = {
-                        session: doc.data()
-                    };
-                    response.push(selectedItem);
-                } 
-            }
-            });
-            return res.status(200).send(response);
+            return res.status(200).send();
         } catch (error) {
             console.log(error);
             return res.status(500).send(error);

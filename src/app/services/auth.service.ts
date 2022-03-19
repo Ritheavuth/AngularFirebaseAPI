@@ -15,6 +15,10 @@ export class AuthService {
     this.authState();
   }
 
+  getUser(): SocialUser {
+    return this.user;
+  }
+
   authState() {
     this.socialAuthService.authState.subscribe((user) => {
       this.user = user;
