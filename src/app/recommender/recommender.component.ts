@@ -35,7 +35,7 @@ export class RecommenderComponent implements OnInit {
   getAllSession() {
     this.sessionService.getSession().subscribe(data => {
       this.sessionList = data;
-      // console.log(this.sessionList);
+      console.log(this.sessionList);
       this.getSpecUser(this.id);
     })
   }
@@ -43,9 +43,9 @@ export class RecommenderComponent implements OnInit {
   getSpecUser(user_psid: string) {
     this.sessionService.getUser(user_psid).subscribe(data => {
       this.user = data;
-      // console.log(this.user);
+      console.log(this.user);
       this.filterSession(this.user.category.toString(), this.user.location.toString(), this.user.businessArea.toString());
-      // console.log(this.filteredSessions);
+      console.log(this.filteredSessions);
     })
   }
 

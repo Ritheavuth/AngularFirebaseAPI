@@ -39,6 +39,13 @@ img {
   margin: 30px auto;
 }
 
+.back {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding-bottom: 3rem;
+}
+
 mat-card-title {
   padding-bottom: 10px;
 }
