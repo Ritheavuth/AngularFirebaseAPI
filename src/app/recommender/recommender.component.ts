@@ -44,11 +44,13 @@ export class RecommenderComponent implements OnInit {
     this.sessionService.getUser(user_psid).subscribe(data => {
       this.user = data;
       this.likes = this.user.interest;
-      this.filterSession(this.user.category.toString(), this.user.location.toString(), this.user.businessArea.toString());
+      this.filteredSessions = this.proirFilter(this.user.category.toString(), this.user.location.toString(), this.user.businessArea.toString());
+      // this.filterSession(this.user.category.toString(), this.user.location.toString(), this.user.businessArea.toString());
       // console.log(this.filteredSessions);
     })
   }
 
+  // Function to filter sessions based on user's interest
   filterSession(category: string, location: string, businessArea: string) {
     const categoryList = this.sessionList.filter((element:any) => element.session.category === category);
     const locationList = this.sessionList.filter((element:any) => element.session.location === location);
@@ -58,6 +60,26 @@ export class RecommenderComponent implements OnInit {
 
     });
     this.filteredSessions = res.slice(0, 10); //limit filtered sessions to only 10
+  }
+
+  // Function just like filterSession but more effiencient
+  proirFilter(category: string, location: string, businessArea: string){
+    const categoryList = this.sessionList.filter((element:any) => element.session.category === category);
+    const locationList = this.sessionList.filter((element:any) => element.session.location === location);
+    const businessAreaList = this.sessionList.filter((element:any) => element.session.businessArea === businessArea);
+
+    const allFilteredList = categoryList.filter((element:any) => element.session.location === location).filter((element:any) => element.session.businessArea === businessArea);
+
+    const categoryAndLocation = categoryList.filter((element:any) => element.session.location === location);
+    const categoryAndArea = categoryList.filter((element:any) => element.session.businessArea === businessArea);
+    const locationAndArea = locationList.filter((element:any) => element.session.businessArea === businessArea);
+
+    const res = allFilteredList.concat(categoryAndLocation).concat(categoryAndArea).concat(locationAndArea)
+                .concat(categoryList).concat(locationList).concat(businessAreaList)
+                .filter(function(elem:any, index:any, self:any) {
+      return index === self.indexOf(elem);
+    });
+    return res.slice(0, 10);
   }
 
   updateUser() {
