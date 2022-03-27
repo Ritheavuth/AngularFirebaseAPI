@@ -17,7 +17,8 @@ export class RecommenderComponent implements OnInit {
   filteredSessions: any = [];
   i = 0;
   images: string[] = [];
-  likes: any[] = [];
+  likes: Array<any> = [];
+  uniqueSession: Array<any> = [];
 
   constructor(private sessionService: SessionService, private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute) {
   }
@@ -35,7 +36,7 @@ export class RecommenderComponent implements OnInit {
   getAllSession() {
     this.sessionService.getSession().subscribe(data => {
       this.sessionList = data;
-      // console.log(this.sessionList);
+      console.log(this.sessionList);
       this.getSpecUser(this.id);
     })
   }
@@ -43,7 +44,7 @@ export class RecommenderComponent implements OnInit {
   getSpecUser(user_psid: string) {
     this.sessionService.getUser(user_psid).subscribe(data => {
       this.user = data;
-      // console.log(this.user);
+      this.likes = this.user.interest;
       this.filterSession(this.user.category.toString(), this.user.location.toString(), this.user.businessArea.toString());
       // console.log(this.filteredSessions);
     })
@@ -73,17 +74,28 @@ export class RecommenderComponent implements OnInit {
     console.log(this.images);
   }
 
+  getInterestedSession() {
+    for (var interest of this.user.interest) {
+      this.likes.push(interest);
+    }
+  }
+
   like() {
-    this.likes.push(this.filteredSessions[this.i].session);
+    for (var like of this.likes) {
+      if (this.filteredSessions[this.i].session.id != like.id) {
+        this.likes.push(this.filteredSessions[this.i].session);
+        break;
+      } else {
+        console.log("already liked");
+      }
+    }
     this.i++;
-    // console.log(this.likes);
-    this.user.interest = this.likes
-    // console.log(this.user);
+    this.user.interest = this.likes;
     this.updateUser();
+    console.log(this.user.interest);
   }
 
   dislike() {
     this.i++;
-    // console.log(this.likes);
   }
 }
