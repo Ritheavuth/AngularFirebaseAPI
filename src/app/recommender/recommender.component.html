@@ -45,7 +45,7 @@
   </p>
   <div *ngIf="likes.length > 0">
     <p class="title">Here are the events that you liked:</p>
-    <mat-card *ngFor="let item of likes" class="container">
+    <mat-card *ngFor="let item of user.interest" class="container">
       <mat-card-header>
         <mat-card-title>{{ item.title }}</mat-card-title>
         <mat-card-subtitle>{{ item.businessArea }}</mat-card-subtitle>

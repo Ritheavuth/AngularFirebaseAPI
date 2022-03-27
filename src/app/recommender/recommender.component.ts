@@ -18,7 +18,6 @@ export class RecommenderComponent implements OnInit {
   i = 0;
   images: string[] = [];
   likes: Array<any> = [];
-  uniqueSession: Array<any> = [];
 
   constructor(private sessionService: SessionService, private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute) {
   }
@@ -36,7 +35,7 @@ export class RecommenderComponent implements OnInit {
   getAllSession() {
     this.sessionService.getSession().subscribe(data => {
       this.sessionList = data;
-      console.log(this.sessionList);
+      // console.log(this.sessionList);
       this.getSpecUser(this.id);
     })
   }
@@ -81,18 +80,15 @@ export class RecommenderComponent implements OnInit {
   }
 
   like() {
-    for (var like of this.likes) {
-      if (this.filteredSessions[this.i].session.id != like.id) {
-        this.likes.push(this.filteredSessions[this.i].session);
-        break;
-      } else {
-        console.log("already liked");
-      }
-    }
+    this.likes.push(this.filteredSessions[this.i].session);
     this.i++;
-    this.user.interest = this.likes;
+    // console.log(this.likes);
+    this.user.interest = Array.from(new Set(this.likes.map(a => a.id)))
+    .map(id => {
+      return this.likes.find(a => a.id === id)
+    });
     this.updateUser();
-    console.log(this.user.interest);
+    // console.log(this.user.interest);
   }
 
   dislike() {
