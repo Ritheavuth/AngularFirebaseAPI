@@ -18,6 +18,7 @@ export class RecommenderComponent implements OnInit {
   i = 0;
   images: string[] = [];
   likes: Array<any> = [];
+  newinterest: Array<any> = [];
 
   constructor(private sessionService: SessionService, private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute) {
   }
@@ -104,6 +105,7 @@ export class RecommenderComponent implements OnInit {
   like() {
     this.likes.push(this.filteredSessions[this.i].session);
     this.i++;
+    this.newinterest.push(this.filteredSessions[this.i].session);
     // console.log(this.likes);
     this.user.interest = Array.from(new Set(this.likes.map(a => a.id)))
     .map(id => {
