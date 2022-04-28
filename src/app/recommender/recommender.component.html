@@ -1,13 +1,23 @@
 <div *ngIf="i < filteredSessions.length">
   <br />
-  <p class="title">Are you interested / planning to join this event?</p>
-  <!-- <div class="image">
-      <img [src]="images[i]" alt="session recommendation" id="sessionimage" />
-    </div> -->
+  <p class="title">このセッションに興味がある/参加予定ですか？</p>
+  <div class="image">
+    <img
+      [src]="filteredSessions[i].session.image"
+      alt="session recommendation"
+      id="sessionimage"
+    />
+  </div>
   <div class="container">
     <mat-card>
       <mat-card-header>
-        <!-- <div mat-card-avatar class="example-header-image"></div> -->
+        <!-- <div mat-card-avatar class="example-header-image">
+          <img
+            [src]="filteredSessions[i].session.image"
+            alt="session recommendation"
+            id="sessionimage"
+          />
+        </div> -->
         <mat-card-title>{{
           filteredSessions[this.i].session.title
         }}</mat-card-title>
@@ -40,18 +50,26 @@
 
 <div *ngIf="i == filteredSessions.length">
   <br />
-  <p *ngIf="likes.length == 0" class="title">
+  <!-- <p *ngIf="likes.length == 0" class="title">
     You didn't like any of the events yet.
-  </p>
+  </p> -->
   <div *ngIf="likes.length > 0">
-    <p class="title">Here are the events that you liked:</p>
-    <mat-card *ngFor="let item of newinterest" class="container">
+    <p class="title">
+      あなたが興味がある/参加予定だと選択したセッションはこちらです。
+    </p>
+    <div class="image" *ngFor="let item of newinterest">
+      <img [src]="item.image" alt="interested session" id="sessionimage" />
+    </div>
+    <!-- <mat-card *ngFor="let item of newinterest" class="container">
+      <div class="image">
+        <img [src]="item.image" alt="interested session" id="sessionimage" />
+      </div>
       <mat-card-header>
         <mat-card-title>{{ item.title }}</mat-card-title>
         <mat-card-subtitle>{{ item.businessArea }}</mat-card-subtitle>
         <mat-card-subtitle>{{ item.category }}</mat-card-subtitle>
         <mat-card-subtitle>{{ item.location }}</mat-card-subtitle>
       </mat-card-header>
-    </mat-card>
+    </mat-card> -->
   </div>
 </div>
