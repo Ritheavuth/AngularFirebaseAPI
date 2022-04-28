@@ -8,16 +8,16 @@
       id="sessionimage"
     />
   </div>
-  <div class="container">
+  <!-- <div class="container">
     <mat-card>
       <mat-card-header>
-        <!-- <div mat-card-avatar class="example-header-image">
+        <div mat-card-avatar class="example-header-image">
           <img
             [src]="filteredSessions[i].session.image"
             alt="session recommendation"
             id="sessionimage"
           />
-        </div> -->
+        </div>
         <mat-card-title>{{
           filteredSessions[this.i].session.title
         }}</mat-card-title>
@@ -32,13 +32,27 @@
         }}</mat-card-subtitle>
       </mat-card-header>
     </mat-card>
-  </div>
+  </div> -->
   <div class="interest">
     <div class="left">
-      <button class="join" id="btnj" (click)="like()">✓</button>
+      <button
+        class="join"
+        id="btnj"
+        [disabled]="clicked"
+        (click)="like(); timeOut()"
+      >
+        ✓
+      </button>
     </div>
     <div class="left">
-      <button class="join" id="btnj" (click)="dislike()">×</button>
+      <button
+        class="join"
+        id="btnj"
+        [disabled]="clicked"
+        (click)="dislike(); timeOut()"
+      >
+        ×
+      </button>
     </div>
   </div>
   <script

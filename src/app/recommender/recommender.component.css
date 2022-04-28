@@ -50,6 +50,15 @@ mat-card-title {
   padding: 0 20%;
 }
 
+@media screen and (max-width: 1200px) {
+  .image {
+    margin: 30px auto;
+  }
+  img {
+    width: 80%;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .container {
     width: 80%;

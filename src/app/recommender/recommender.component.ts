@@ -10,7 +10,7 @@ import { SessionService } from 'src/services/session.service';
   styleUrls: ['./recommender.component.css']
 })
 export class RecommenderComponent implements OnInit {
-
+  clicked = false;
   id: any;
   user: any;
   sessionList: any = [];
@@ -100,6 +100,13 @@ export class RecommenderComponent implements OnInit {
     for (var interest of this.user.interest) {
       this.likes.push(interest);
     }
+  }
+
+  timeOut() {
+    this.clicked = true;
+    setTimeout(() => {
+      this.clicked = false;
+    }, 2000);
   }
 
   like() {
